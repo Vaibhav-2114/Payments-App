@@ -2,10 +2,10 @@ import { User } from "../models/userSchema.js";
 import Account from "../models/accountSchema.js"
 import bcrypt from "bcryptjs"; // or "bcryptjs" if that's the installed package
 import jwt from "jsonwebtoken";
-import config from "../configs/config.js";
 
-function createToken(user) {
-  return jwt.sign({ userId: user._id }, config.JWT_SECRET, { expiresIn: '1d' })
+
+function createToken(user, secret) {
+  return jwt.sign({ userId: user._id }, secret, { expiresIn: '1d' })
 }
 
 function publicUser(user) {
@@ -47,7 +47,7 @@ export async function signUp(req, res) {
     });
 
     return res.status(201).json({
-      token: createToken(user),
+      token: createToken(user, req.app.locals.JWT_SECRET),
       user: publicUser(user),
     })
   } catch (error) {
@@ -74,7 +74,7 @@ export async function signIn(req, res) {
     }
 
     return res.json({
-      token: createToken(user),
+      token: createToken(user, req.app.locals.JWT_SECRET),
       user: publicUser(user),
     });
   } catch (error) {

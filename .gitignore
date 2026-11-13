@@ -24,6 +24,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Test and tool caches
+.wrangler/
 coverage/
 .nyc_output/
 .vite/

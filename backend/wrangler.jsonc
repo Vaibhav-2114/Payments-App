@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "payments-app-worker",
+  "main": "./index.js", // Point this to your Express entry file
+  "compatibility_date": "2026-08-04",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
